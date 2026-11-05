@@ -99,11 +99,17 @@ const translateText = (inputText) => {
 //tego lepiej nie ruszać bo coś wyjebie
 const ignoredTags = ["SCRIPT", "STYLE", "TEXTAREA", "INPUT"];
 
+const isInsideEditable = (textNode) => {
+    const parentEl = textNode.parentElement;
+    return !!parentEl && !!parentEl.closest('[contenteditable="true"]');
+};
+
 const translateNode = (currentNode) => {
     if (processedNodes.has(currentNode)) return;
 
     if (currentNode.nodeType === 1) {
         if (ignoredTags.includes(currentNode.tagName)) return;
+        if (currentNode.isContentEditable) return;
         Array.from(currentNode.childNodes).forEach((childNode) =>
             translateNode(childNode),
         );
@@ -111,6 +117,7 @@ const translateNode = (currentNode) => {
 
     if (currentNode.nodeType === 3 && currentNode.nodeValue) {
         if (!currentNode.nodeValue.trim()) return;
+        if (isInsideEditable(currentNode)) return;
 
         const newText = translateText(currentNode.nodeValue);
         if (currentNode.nodeValue !== newText) {

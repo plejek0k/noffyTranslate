@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "noffyTranslate",
     "description": "Zmienia tekst na ffszystkich sstronach na noffonordacki w duchu głupkoffatości.",
-    "version": "0.3.4",
+    "version": "0.3.5",
     "icons": {
         "16": "logo/logo.png",
         "48": "logo/logo.png",
