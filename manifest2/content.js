@@ -101,7 +101,7 @@ const ignoredTags = ["SCRIPT", "STYLE", "TEXTAREA", "INPUT"];
 
 const isInsideEditable = (textNode) => {
     const parentEl = textNode.parentElement;
-    return !!parentEl && !!parentEl.closest('[contenteditable="true"]');
+    return !!parentEl && parentEl.isContentEditable;
 };
 
 const translateNode = (currentNode) => {
